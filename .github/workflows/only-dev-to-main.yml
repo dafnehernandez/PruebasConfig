@@ -1,0 +1,23 @@
+name: Allow only devs to main
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-source-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate source branch
+        run: |
+          echo "Base branch: ${{ github.base_ref }}"
+          echo "Head branch: ${{ github.head_ref }}"
+
+          if [ "${{ github.head_ref }}" != "devs" ]; then
+            echo "❌ Only PRs from 'devs' are allowed to merge into main."
+            exit 1
+          fi
+
+          echo "✅ PR source branch is valid."
+
