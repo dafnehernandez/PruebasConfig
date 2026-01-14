@@ -20,4 +20,3 @@ jobs:
           fi
 
           echo "✅ PR source branch is valid."
-
